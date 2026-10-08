@@ -45,7 +45,7 @@ struct HueSaturationSheet: View {
                    reset: resetValues.saturation)
             slider("明度", value: settings.lightness, range: -100...100, unit: "",
                    track: .opposing(.black, .white), reset: resetValues.lightness)
-            for showsSpectrum {
+            if showsSpectrum {
                 SpectrumEditor(settings: settings)
                 Toggle("改为应用到此范围之外", isOn: settings.invertRange)
             }

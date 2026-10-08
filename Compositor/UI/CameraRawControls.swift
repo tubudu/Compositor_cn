@@ -371,16 +371,16 @@ struct CameraRawControls: View {
     static let labelWidth: CGFloat = 96
 
     private enum Section: String, CaseIterable, Identifiable {
-        case light = String(localized: "Light")
-        case color = String(localized: "Color")
-        case colorGrading = String(localized: "Color Grading")
-        case effects = String(localized: "Effects")
-        case curve = String(localized: "Curve")
-        case colorMixer = String(localized: "Color Mixer")
-        case detail = String(localized: "Detail")
-        case optics = String(localized: "Optics")
-        case geometry = String(localized: "Geometry")
-        case calibration = String(localized: "Calibration")
+        case light = "Light"
+        case color = "Color"
+        case colorGrading = "Color Grading"
+        case effects = "Effects"
+        case curve = "Curve"
+        case colorMixer = "Color Mixer"
+        case detail = "Detail"
+        case optics = "Optics"
+        case geometry = "Geometry"
+        case calibration = "Calibration"
         var id: String { rawValue }
     }
 }
