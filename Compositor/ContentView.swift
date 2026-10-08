@@ -51,8 +51,8 @@ struct ContentView: View {
             }
             if session.tool == .eyedropper {
                 HStack(spacing: 16) {
-                    Text("Eyedropper").font(ToolHeaderStyle.titleFont)
-                    Toggle("Sample Ring", isOn: $session.showsSampleRing).toggleStyle(.checkbox)
+                    Text("吸管").font(ToolHeaderStyle.titleFont)
+                    Toggle("采样环", isOn: $session.showsSampleRing).toggleStyle(.checkbox)
                     Spacer()
                 }.padding(.horizontal, 18).toolHeaderBar()
                 Divider()
@@ -68,7 +68,7 @@ struct ContentView: View {
             // No tool (A) keeps the header, so the canvas doesn't jump.
             if session.tool == .idle {
                 HStack(spacing: 16) {
-                    Text("Select a tool").font(ToolHeaderStyle.titleFont)
+                    Text("选择工具").font(ToolHeaderStyle.titleFont)
                     Spacer()
                 }.padding(.horizontal, 18).toolHeaderBar()
                 Divider()
@@ -166,11 +166,11 @@ struct ContentView: View {
         // The toolbar itself is hidden and shown by the window (see `toggleCanvasOnly`), which lays its buttons out
         // again properly; hidden here instead, it came back with the tabs over the window buttons.
         .ignoresSafeArea(.container, edges: session.canvasOnly ? .top : [])
-        .navigationTitle(session.projectURL?.deletingPathExtension().lastPathComponent ?? "Untitled")
+        .navigationTitle(session.projectURL?.deletingPathExtension().lastPathComponent ?? "未命名")
         .toolbar {
             ToolbarItem(placement: .navigation) {
-                Button { requestNewCanvas() } label: { Label("New canvas", systemImage: "plus") }
-                    .help("New canvas (⌘N)").accessibilityIdentifier("newCanvasToolbar")
+                Button { requestNewCanvas() } label: { Label("新建画布", systemImage: "plus") }
+                    .help("新建画布 (⌘N)").accessibilityIdentifier("newCanvasToolbar")
                     .disabled(session.isImporting || session.showsBusy || session.levels != nil)
                     .modifier(NewProjectDropTarget(workspace: applicationDelegate?.workspace))
             }
@@ -189,12 +189,12 @@ struct ContentView: View {
             // Without this spacer, the growing tab strip pushes the primary actions left.
             ToolbarSpacer(.flexible, placement: .navigation)
             ToolbarItem(placement: .primaryAction) {
-                Button("Fit") { session.fit() }.help("Fit canvas in window (⌘0)")
+                Button("适配") { session.fit() }.help("适配画布到窗口 (⌘0)")
                     .accessibilityIdentifier("fitCanvas").disabled(session.document == nil)
                     .padding(.horizontal, 4)
             }
             ToolbarItem(placement: .primaryAction) {
-                Button("100%") { session.zoom(to: 1) }.help("Actual pixels (⌘1)")
+                Button("100%") { session.zoom(to: 1) }.help("实际像素 (⌘1)")
                     .accessibilityIdentifier("actualPixels").disabled(session.document == nil)
                     .padding(.horizontal, 4)
             }
@@ -202,10 +202,10 @@ struct ContentView: View {
                 HStack(spacing: 0) {
                     Button { session.zoomKeyboard(by: 1) } label: {
                         Image(systemName: "plus.magnifyingglass")
-                    }.help("Zoom in (⌘+)").disabled(session.document == nil)
+                    }.help("放大 (⌘+)").disabled(session.document == nil)
                     Button { session.zoomKeyboard(by: -1) } label: {
                         Image(systemName: "minus.magnifyingglass")
-                    }.help("Zoom out (⌘−)").disabled(session.document == nil)
+                    }.help("缩小 (⌘−)").disabled(session.document == nil)
                 }
                 .padding(.horizontal, 4)
             }
@@ -218,21 +218,21 @@ struct ContentView: View {
             if closed { levelsPanel.close() }
             else {
                 levelsPanel.onClose = { session.cancelLevels() }
-                levelsPanel.show(title: "Levels", content: LevelsSheet(session: session))
+                levelsPanel.show(title: "色阶", content: LevelsSheet(session: session))
             }
         }
         .onChange(of: session.colorRange == nil) { _, closed in
             if closed { colorRangePanel.close() }
             else {
                 colorRangePanel.onClose = { session.cancelColorRange() }
-                colorRangePanel.show(title: "Color Range", content: ColorRangeSheet(session: session))
+                colorRangePanel.show(title: "色彩范围", content: ColorRangeSheet(session: session))
             }
         }
         .onChange(of: session.hueSaturation == nil) { _, closed in
             if closed { adjustmentPanel.close() }
             else {
                 adjustmentPanel.onClose = { session.cancelHueSaturation() }
-                adjustmentPanel.show(title: "Hue/Saturation", content: HueSaturationSheet(session: session))
+                adjustmentPanel.show(title: "色相/饱和度", content: HueSaturationSheet(session: session))
             }
         }
         .onChange(of: session.effectsEditing) { _, selection in
@@ -262,7 +262,7 @@ struct ContentView: View {
             else {
                 filterPanel.onClose = { session.cancelFilter() }
                 let placement: FloatingPanelPlacement = session.filterEdit?.kind == .cameraRaw ? .dockedToMainWindowRight : .automatic
-                filterPanel.show(title: session.filterEdit?.kind.rawValue ?? "Filter", content: FilterSheet(session: session),
+                filterPanel.show(title: session.filterEdit?.kind.rawValue ?? "滤镜", content: FilterSheet(session: session),
                                  placement: placement)
             }
         }
@@ -277,18 +277,18 @@ struct ContentView: View {
                 if (error as NSError).code != NSUserCancelledError { session.importError = error.localizedDescription }
             }
         }
-        .alert("Import couldn’t finish", isPresented: Binding(
+        .alert("导入无法完成", isPresented: Binding(
             get: { session.importError != nil }, set: { if !$0 { session.importError = nil } })) {
                 // No cancel role: an alert with only a cancel button gets a second OK of its own.
-                Button("OK") { session.importError = nil }
+                Button("好") { session.importError = nil }
             } message: { Text(session.importError ?? "") }
-        .alert("Couldn’t paint", isPresented: Binding(get: { session.brushError != nil },
+        .alert("无法绘画", isPresented: Binding(get: { session.brushError != nil },
             set: { if !$0 { session.brushError = nil } })) {
-                Button("OK") { session.brushError = nil }
+                Button("好") { session.brushError = nil }
             } message: { Text(session.brushError ?? "") }
-        .alert("Couldn’t crop", isPresented: Binding(get: { session.cropError != nil },
+        .alert("无法裁剪", isPresented: Binding(get: { session.cropError != nil },
             set: { if !$0 { session.cropError = nil } })) {
-                Button("OK") { session.cropError = nil }
+                Button("好") { session.cropError = nil }
             } message: { Text(session.cropError ?? "") }
     }
     private func requestNewCanvas() {
@@ -340,18 +340,23 @@ struct ContentView: View {
                 Text(session.viewport.zoom, format: .percent.precision(.fractionLength(0...1)))
                     .frame(width: 62, alignment: .leading).accessibilityIdentifier("zoomStatus")
                 Text("\(document.width) × \(document.height) px").accessibilityIdentifier("canvasDimensions")
-                Text("sRGB · Transparent")
-            } else { Text("Ready when you are") }
+                Text("sRGB · 透明")
+            } else { Text("准备就绪") }
             Spacer()
             if session.showsBusy {
                 ProgressView().controlSize(.mini)
-                Text("Working…")
+                Text("处理中…")
             } else if session.isImporting {
                 ProgressView().controlSize(.mini)
-                Text("Importing images…")
+                Text("导入图像…")
             } else {
-                Text(session.tool == .marquee ? (session.marqueeKind == .ellipse ? "Drag an ellipse · Shift add · Option subtract · Shift again mid-drag circle · Drag inside to move · Delete clears · ⌘D deselect" : "Drag a rectangle · Shift add · Option subtract · Shift again mid-drag square · Drag inside to move · ⌘-drag moves pixels · Delete clears · ⌘D deselect") : session.tool == .wand ? (session.wandMode == .object ? "Click an object to select its outline · Tab for Wand · Shift add · Option subtract · Drag inside to move · ⌘-drag moves pixels · Delete clears · ⌘D deselect" : "Click to select similar colors · Tab for Object · Shift add · Option subtract · Drag inside to move · ⌘-drag moves pixels · Delete clears · ⌘D deselect") : session.tool == .lasso ? (session.lassoKind == .freehand ? "Drag to select · Drag inside to move · Shift add · Option subtract · Delete clears · ⌥⌫/⌘⌫ fill · ⌘D deselect" : "Click corners · Click start, double-click or Enter to close · Delete removes corner · Escape cancel") : session.tool == .brush ? (session.brushMode == .erase ? "Drag to erase" : "Drag to paint") + " · [ ] size · Shift-[ ] hardness · 1–0 opacity · Escape cancel · Space to pan" : session.tool == .blur ? (session.blurMode == .blur ? "Drag to soften" : session.blurMode == .smudge ? "Drag to smudge" : "Drag to push pixels") + " · [ ] size · Shift-[ ] hardness · 1–0 strength · Space to pan" : session.tool == .cloneStamp ? "Option-click to set the source · Drag to clone · [ ] size · Shift-[ ] hardness · 1–0 opacity · Space to pan" : session.tool == .spotHealing ? "Drag over blemishes to heal · [ ] size · Shift-[ ] hardness · Escape cancel · Space to pan" : session.tool == .type ? "Drag a text box · Click text to edit · Drag box handles to resize · ⌘Return finish · Escape cancel" : session.tool == .shape ? "Drag to draw a shape on a new layer · Shift \(session.shapeKind == .line ? "45°" : session.shapeKind == .rectangle ? "square" : "circle") · Option from center · Shift-U or Tab for the next shape · Escape cancel · Space to pan" : session.tool == .gradient ? "Drag to draw · Drag ends to adjust · Shift 45° · 1–0 opacity · Enter apply · Escape cancel" : session.tool == .crop ? "Drag to crop · Enter apply · Escape cancel · Space to pan" : session.tool == .move ? "Drag to move · Handles to resize · Circle to rotate · 1–0 layer opacity · Space to pan" : session.tool == .hand ? "Drag to pan · Pinch to zoom" : session.tool == .idle ? "No tool selected · Press a tool's key to pick one · Space to pan" : "Click to zoom in · Option-click to zoom out · Drag right or left to zoom smoothly · Space to pan")
+                Text(session.tool == .marquee ? (session.marqueeKind == .ellipse ? "拖动绘制椭圆 · Shift 添加 · Option 减去 · 拖动中按 Shift 变圆 · 内部拖动移动 · Delete 清除 · ⌘D 取消选择" : "拖动绘制矩形 · Shift 添加 · Option 减去 · 拖动中按 Shift 变方 · 内部拖动移动 · ⌘-拖动移动像素 · Delete 清除 · ⌘D 取消选择") : session.tool == .wand ? (session.wandMode == .object ? "点击对象选择轮廓 · Tab 切换为魔棒 · Shift 添加 · Option 减去 · 内部拖动移动 · ⌘-拖动移动像素 · Delete 清除 · ⌘D 取消选择" : "点击选择相似颜色 · Tab 切换为对象 · Shift 添加 · Option 减去 · 内部拖动移动 · ⌘-拖动移动像素 · Delete 清除 · ⌘D 取消选择") : session.tool == .lasso ? (session.lassoKind == .freehand ? "拖动选择 · 内部拖动移动 · Shift 添加 · Option 减去 · Delete 清除 · ⌥⌫/⌘⌫ 填充 · ⌘D 取消选择" : "点击角点 · 点击起点、双击或回车闭合 · Delete 删除角点 · Escape 取消") : session.tool == .brush ? (session.brushMode == .erase ? "拖动擦除" : "拖动绘画") + " · [ ] 大小 · Shift-[ ] 硬度 · 1–0 不透明度 · Escape 取消 · 空格平移" : session.tool == .blur ? (session.blurMode == .blur ? "拖动柔化" : session.blurMode == .smudge ? "拖动涂抹" : "拖动推动像素") + " · [ ] 大小 · Shift-[ ] 硬度 · 1–0 强度 · 空格平移" : session.tool == .cloneStamp ? "Option-点击设置源点 · 拖动克隆 · [ ] 大小 · Shift-[ ] 硬度 · 1–0 不透明度 · 空格平移" : session.tool == .spotHealing ? "拖动修复瑕疵 · [ ] 大小 · Shift-[ ] 硬度 · Escape 取消 · 空格平移" : session.tool == .type ? "拖动文本框 · 点击文本编辑 · 拖动框手柄调整大小 · ⌘Return 完成 · Escape 取消" : session.tool == .shape ? "拖动在新图层上绘制形状 · Shift \(session.shapeKind == .line ? "45°" : session.shapeKind == .rectangle ? "正方形" : "圆形") · Option 从中心 · Shift-U ... (line truncated to 2000 chars)
             }
+        }
+        .font(.system(size: 11).monospacedDigit()).foregroundStyle(.secondary)
+        .padding(.horizontal, 18).frame(height: 30)
+        .accessibilityElement(children: .contain)
+    }
         }
         .font(.system(size: 11).monospacedDigit()).foregroundStyle(.secondary)
         .padding(.horizontal, 18).frame(height: 30)
@@ -376,7 +381,7 @@ private struct PanelResizeEdge: View {
                         width = min(range.upperBound, max(range.lowerBound, (start - value.translation.width).rounded()))
                     }
                     .onEnded { _ in startWidth = nil })
-                .help("Drag to resize the panel")
+                .help("拖动调整面板大小")
         }
     }
 }
