@@ -1,21 +1,19 @@
-# Compositor
+# Compositor（中文版）
 
-Adobe Photoshop 太贵，而 GIMP 这类工具用起来不够顺手，无法让我保持流畅的工作状态。这就是我开发 Compositor 的原因。
+Compositor 是一款完全免费开源的 macOS 图像编辑软件，定位为 Photoshop 的轻量替代品，围绕合成与后期处理工作流打造，具备创建像素级完美图像所需的全套工具。
 
-目标是打造一款完全免费开源的全功能图像编辑器。我以前用 Photoshop 做合成和后期处理，所以 Compositor 围绕这套工作流程构建——具备创建像素级完美最终图像所需的工具。
+本仓库是 Compositor 的**中文化版本**：界面菜单、工具提示、面板、对话框及 README 均已翻译为简体中文，功能与原版保持一致。
 
-因为是开源项目，你可以下载 Xcode 工程，添加、移除或修改任何功能来适应自己的工作流程。
+原项目：[robbietilton/Compositor](https://github.com/robbietilton/Compositor) · 本项目：[tubudu/Compositor_cn](https://github.com/tubudu/Compositor_cn)
 
 ## 安装
 
-### 下载
-从 [robbietilton.com/compositor](https://robbietilton.com/compositor) 获取 Compositor，或从 [GitHub Releases](https://github.com/robbietilton/Compositor/releases/latest) 直接下载最新版本。
+从 [Releases](https://github.com/tubudu/Compositor_cn/releases/latest) 下载 `Compositor.dmg`，打开后将 Compositor 拖入 Applications 文件夹。
 
-### Homebrew
-
-```sh
-brew install --cask robbietilton-compositor
-```
+> **未签名提示**：此 DMG 未经 Apple 签名公证。若 macOS 阻止打开，请右键 App → 打开，或在终端执行：
+> ```sh
+> xattr -cr /Applications/Compositor.app
+> ```
 
 ## 功能
 
@@ -75,10 +73,14 @@ brew install --cask robbietilton-compositor
 - 项目保存时继续工作
 - 全套 Photoshop 风格键盘快捷键，可在编辑 > 键盘快捷键中重新映射
 - 拖动数字标签调整值，类似 Photoshop
-- 自动更新，已签名和公证
 
 ### 支持 AI agent
 - AI agent 和脚本可直接构建和编辑项目：`.comp` 是 PNG 图层和清单文件的文件夹，打开的项目在写入时实时更新。参见 [编写 Compositor 项目](docs/writing-comp-files.md)
+
+## 中文化说明
+
+- 界面文本替换位于各 Swift 文件中，配合 `Compositor/zh-Hans.lproj/Localizable.strings`
+- 后续更新原版后，可对比上游仓库重新合并
 
 ## 系统要求
 
@@ -87,18 +89,20 @@ brew install --cask robbietilton-compositor
 
 ## 构建
 
-打开 `Compositor.xcodeproj` 并运行 **Compositor** scheme。
+```sh
+# 编译（无需签名）
+xcodebuild -project Compositor.xcodeproj -scheme Compositor -configuration Release -derivedDataPath build CODE_SIGNING_ALLOWED=NO
 
-## 发布
+# 打包 DMG（需 brew install create-dmg）
+create-dmg --volname "Compositor" --window-pos 200 120 --window-size 600 380 \
+  --icon-size 128 --text-size 13 \
+  --icon "Compositor.app" 160 180 --hide-extension "Compositor.app" \
+  --app-drop-link 440 180 \
+  "dist/Compositor.dmg" "build/Build/Products/Release/"
+```
 
-`scripts/release.sh` 构建 Release 版本，使用 Developer ID 签名、公证并装订，打包为 `dist/Compositor-<version>.dmg`。
-
-需要以下条件（均不在此仓库中）：
-
-- 登录钥匙串中的 **Developer ID Application** 证书
-- 使用 `xcrun notarytool store-credentials "compositor-notary" …` 保存的公证凭证
-- [`create-dmg`](https://github.com/create-dmg/create-dmg)（`brew install create-dmg`）
+带签名公证的正式发布流程见 `scripts/release.sh`（需 Developer ID 证书与公证凭证）。
 
 ## 许可证
 
-MIT — 参见 [LICENSE](LICENSE)。
+MIT — 参见 [LICENSE](LICENSE)。本项目基于 [robbietilton/Compositor](https://github.com/robbietilton/Compositor)，同样以 MIT 协议发布。
