@@ -9,10 +9,10 @@ nonisolated enum NewCanvasUnit: String, CaseIterable, Sendable {
     /// The unit written out, for the summary line's pill.
     var name: String {
         switch self {
-        case .pixels: "Pixels"
-        case .inches: "Inches"
-        case .centimeters: "Centimeters"
-        case .millimeters: "Millimeters"
+        case .pixels: "像素"
+        case .inches: "英寸"
+        case .centimeters: "厘米"
+        case .millimeters: "毫米"
         }
     }
     /// The next unit, for the pill: px → in → cm → mm → px.
@@ -74,7 +74,7 @@ struct NewCanvasSheet: View {
     private var valid: Bool { pixelWidth != nil && pixelHeight != nil }
     private var resolutionHelp: String {
         let size = unit != .pixels ? pixelWidth.flatMap { w in pixelHeight.map { h in " · \(Int(resolution)) DPI: \(w) × \(h) pixels" } } : nil
-        return "Resolution: 72 for screens, 300 for print. Click to switch." + (size ?? "")
+        return "分辨率：72 用于屏幕，300 用于打印。点击切换。" + (size ?? "")
     }
     /// Shows the sizes in another unit, the same canvas written differently.
     private func switchUnit(to new: NewCanvasUnit) {
@@ -93,12 +93,12 @@ struct NewCanvasSheet: View {
         VStack(alignment: .leading, spacing: 24) {
             VStack(spacing: 14) {
                 HStack {
-                    Text("New canvas").font(.title2.weight(.semibold))
+                    Text("新建画布").font(.title2.weight(.semibold))
                     Spacer()
                     // Preset sizes, tucked into a More button; the size in use is checked.
                     Menu {
-                        Picker("Size", selection: preset) {
-                            Text("Custom").tag(CanvasPreset?.none)
+                        Picker("尺寸", selection: preset) {
+                            Text("自定义").tag(CanvasPreset?.none)
                             ForEach(CanvasPreset.groups.indices, id: \.self) { group in
                                 Divider()
                                 ForEach(CanvasPreset.groups[group]) { Text($0.title).tag(CanvasPreset?.some($0)) }
@@ -117,23 +117,23 @@ struct NewCanvasSheet: View {
                             .padding(.trailing, -10)
                     }
                     .menuStyle(.button).buttonStyle(.plain).menuIndicator(.hidden).fixedSize()
-                    .help("Preset sizes for screens and common formats")
-                    .accessibilityLabel("Preset sizes")
+                    .help("屏幕和常见格式的预设尺寸")
+                    .accessibilityLabel("预设尺寸")
                 }
             }
             HStack(spacing: 16) {
-                dimension("Width", text: $width, field: .width)
+                dimension("宽度", text: $width, field: .width)
                 Image(systemName: "multiply").foregroundStyle(.tertiary).padding(.top, 20)
-                dimension("Height", text: $height, field: .height)
+                dimension("高度", text: $height, field: .height)
             }
             // The settings are pills, each changed the same way: click to step to the next choice.
             HStack(spacing: 4) {
-                CyclePill(background.title, help: "Start see-through, or with a white or black Background layer. Click to switch.") {
+                CyclePill(background.title, help: "从透明开始，或使用白色或黑色背景图层。点击切换。") {
                     background = background.next
                 }
                 .accessibilityIdentifier("canvasBackground")
                 Text("·")
-                CyclePill(unit.name, help: "Units: pixels, inches, centimeters or millimeters. Click to switch.") {
+                CyclePill(unit.name, help: "单位：像素、英寸、厘米或毫米。点击切换。") {
                     switchUnit(to: unit.next)
                 }
                 .accessibilityIdentifier("canvasUnit")
@@ -147,15 +147,15 @@ struct NewCanvasSheet: View {
             }
             .font(.callout).foregroundStyle(.secondary)
             if !valid {
-                Text(unit == .pixels ? "Enter whole numbers from 1 to \(DocumentLimits.maxSide.formatted()) pixels."
-                                     : "Enter a size up to \(DocumentLimits.maxSide.formatted()) pixels at this DPI.")
+                Text(unit == .pixels ? "输入从 1 到 \(DocumentLimits.maxSide.formatted()) 像素的整数。"
+                                     : "在此 DPI 下输入最大 \(DocumentLimits.maxSide.formatted()) 像素的尺寸。")
                     .font(.callout).foregroundStyle(.orange)
             }
             HStack(spacing: 10) {
-                Button("Open project") { onOpen?() }.buttonStyle(.bordered)
-                Button("Import image") { session.showsImporter = true }.buttonStyle(.bordered)
+                Button("打开项目") { onOpen?() }.buttonStyle(.bordered)
+                Button("导入图像") { session.showsImporter = true }.buttonStyle(.bordered)
                 Spacer()
-                Button("Create canvas") {
+                Button("创建画布") {
                     guard let w = pixelWidth, let h = pixelHeight else { return }
                     if let onCreate { onCreate(w, h, resolution, background.color) }
                     else { session.createDocument(width: w, height: h, emptyLayer: true, resolution: resolution, background: background.color) }

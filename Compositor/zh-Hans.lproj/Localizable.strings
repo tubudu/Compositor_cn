@@ -1,0 +1,430 @@
+/* BrushControls.swift */
+"This Layer" = "当前图层";
+"All Layers" = "所有图层";
+"Size" = "大小";
+"Hardness" = "硬度";
+"Radius" = "半径";
+"Smoothing" = "平滑";
+"Black · Hide" = "黑色 · 隐藏";
+"White · Reveal" = "白色 · 显示";
+"Color" = "颜色";
+"Option-click to set the source" = "Option-点击设置源点";
+"Mask" = "蒙版";
+"Paint with the foreground color (B), or erase pixels away (E)" = "用前景色绘画 (B)，或擦除像素 (E)";
+"Liquify pushes pixels · Blur softens · Smudge drags color along" = "液化推动像素 · 模糊柔化 · 涂抹拖动颜色";
+"Keep the source moving with the brush between strokes; off starts every stroke at the source point" = "画笔在笔画之间保持源点跟随；关闭则每次笔画都从源点开始";
+"Copy from the active layer only, or from every visible layer as shown" = "仅从当前图层复制，或从所有可见图层复制";
+"Press 1–9 for 10–90%, 0 for 100%" = "按 1–9 设为 10–90%，0 为 100%";
+"How far the blur softens, in pixels" = "模糊柔化的距离，以像素为单位";
+"The brush trails the pointer on a string this long, so a shaky hand still draws a smooth line" = "画笔以这个长度的线跟随指针，所以手抖也能画出平滑线条";
+"Foreground color" = "前景色";
+
+/* CameraRawColorControls.swift */
+"Custom" = "自定义";
+"Linear" = "线性";
+"Medium Contrast" = "中等对比度";
+"Strong Contrast" = "强对比度";
+"Parametric lifts tonal regions. Point places anchors on the curve." = "参数化提升色调区域。点模式在曲线上放置锚点。";
+"RGB changes brightness. Red, green, and blue also shift the color." = "RGB 改变亮度。红、绿、蓝也改变颜色。";
+"Input and output of the selected curve point." = "所选曲线点的输入和输出。";
+"Replaces this curve with a straight line or a contrast curve." = "用直线或对比度曲线替换此曲线。";
+"HSL lists every color. Color edits one family. Point Color adjusts a color you pick." = "HSL 列出所有颜色。颜色编辑一个系列。点颜色调整你选择的颜色。";
+"Hue shifts the color, Saturation its strength, and Luminance its brightness." = "色相改变颜色，饱和度改变强度，亮度改变明暗。";
+"Drag a color in the picture. Nearby color families move together." = "拖动图片中的颜色。附近的颜色系列一起移动。";
+"Click the picture to save a color. Up to eight colors." = "点击图片保存颜色。最多八种颜色。";
+"Select this picked color." = "选择此选取的颜色。";
+"Dims the picture outside this color's range. It is not kept when you press OK." = "使此颜色范围外的图片变暗。按 OK 后不会保留。";
+"Three-Way shows shadows, midtones, and highlights. The other choices show one wheel." = "三色轮显示阴影、中间调和高亮。其他选项显示一个色轮。";
+"Drag inside the wheel. Angle sets hue, distance sets saturation." = "在色轮内拖动。角度设置色相，距离设置饱和度。";
+"Hue and saturation of this wheel." = "此色轮的色相和饱和度。";
+"Drag to set hue and saturation. Double-click to reset this wheel." = "拖动设置色相和饱和度。双击重置此色轮。";
+
+/* CameraRawControls.swift */
+"White Balance" = "白平衡";
+"Click the original layer. Click the eyedropper again to stop." = "点击原始图层。再次点击吸管停止。";
+"Glow" = "辉光";
+"Vignette" = "暗角";
+"Grain" = "颗粒";
+"Histogram" = "直方图";
+"Vectorscope" = "矢量示波器";
+"Red, green, and blue of the pixel under the pointer." = "指针下像素的红、绿、蓝。";
+"Auto balances the average color. Custom follows Temperature and Tint." = "自动平衡平均颜色。自定义遵循色温和色调。";
+"Click a pixel that should be neutral." = "点击一个应该是中性的像素。";
+"Diffusion is soft and wide, Bloom is tighter, and Halation is a red fringe." = "扩散柔和宽广，辉光更紧凑，光晕是红色边缘。";
+"Highlight Priority protects bright edges. Color Priority also reduces color. Paint Overlay covers the edges evenly." = "高光优先保护亮边。颜色优先也减少颜色。绘画叠加均匀覆盖边缘。";
+"White Balance Selector" = "白平衡选择器";
+
+/* CameraRawDetailOpticsControls.swift */
+"Sharpening" = "锐化";
+"Noise Reduction" = "降噪";
+"No lens metadata on this layer. Profile sliders set generic correction strength." = "此图层没有镜头数据。配置文件滑块设置通用校正强度。";
+"Manual" = "手动";
+"Defringe" = "去边";
+"Click the fringe on the layer. Click the eyedropper again to stop." = "点击图层上的边缘。再次点击吸管停止。";
+"Low" = "低";
+"High" = "高";
+"Pulls red and blue fringes apart toward the center to reduce color edging." = "将红蓝边缘向中心拉开以减少颜色边缘。";
+"Applies generic profile strength when camera metadata is not available." = "当相机数据不可用时应用通用配置文件强度。";
+"Click a purple or green fringe to set its hue range." = "点击紫色或绿色边缘设置其色相范围。";
+"Start of the hue range, in degrees." = "色相范围起点，以度为单位。";
+"End of the hue range, in degrees." = "色相范围终点，以度为单位。";
+
+/* CameraRawGeometryCalibrationControls.swift */
+"Upright" = "直立";
+"Drag on the layer to place a guide. Draw at least two lines." = "在图层上拖动放置参考线。至少画两条线。";
+"Shadows" = "阴影";
+"Red Primary" = "红原色";
+"Green Primary" = "绿原色";
+"Blue Primary" = "蓝原色";
+"Clear Guides" = "清除参考线";
+"Off leaves the picture as it is. Guided straightens from lines you draw on the picture." = "关闭保持图片不变。引导根据你在图片上画的线拉直。";
+"Draw two or more lines on the preview that should be level or vertical." = "在预览上画两条或更多应该水平或垂直的线。";
+"Remove every guide line." = "移除所有参考线。";
+"Perspective allows stronger keystone. Rectilinear keeps the warp gentler." = "透视允许更强的梯形校正。直线保持变形更温和。";
+"Crops empty edges after the transform and fits the result back into the frame." = "变换后裁剪空白边缘并将结果适配回画框。";
+"Chooses how strongly the calibration sliders below are applied. Version 6 is the current default." = "选择下方校准滑块的强度。版本 6 是当前默认值。";
+
+/* CanvasSizeSheet.swift */
+"Canvas Size" = "画布大小";
+"Width" = "宽度";
+"Height" = "高度";
+"Anchor" = "锚点";
+"Keeps this point fixed. Artwork is not scaled; cropped content remains outside the canvas." = "保持此点固定。 artwork 不缩放；被裁剪的内容保留在画布外。";
+"Extension color" = "扩展颜色";
+"Color for the added canvas" = "新增画布的颜色";
+"Selected" = "已选中";
+
+/* ColorPaletteControls.swift */
+"Swap colors" = "交换颜色";
+"Default colors" = "默认颜色";
+"Swap foreground and background (X)" = "交换前景色和背景色 (X)";
+"Default colors (D)" = "默认颜色 (D)";
+
+/* ColorPickerSheet.swift */
+"OK" = "好";
+"Cancel" = "取消";
+"Click the canvas to sample" = "点击画布取样";
+"Saturation and brightness" = "饱和度和亮度";
+"Hue" = "色相";
+"New color" = "新颜色";
+"Hex color" = "十六进制颜色";
+
+/* ColorRangeSheet.swift */
+"Fuzziness" = "容差";
+"How far a color may be from the picked ones and still be selected" = "颜色与选取颜色的距离多远仍可被选中";
+"Select everything except those colors, such as all but a green screen" = "选择除了这些颜色之外的所有内容，例如除绿幕外的所有内容";
+
+/* CropControls.swift */
+"Crop" = "裁剪";
+"Apply Crop" = "应用裁剪";
+
+/* CurvesControls.swift */
+"Click to add a point. Drag to adjust." = "点击添加点。拖动调整。";
+"Remove point" = "移除点";
+"Reset curve" = "重置曲线";
+
+/* EffectsSheet.swift */
+"Stroke" = "描边";
+"Outside" = "外部";
+"Inside" = "内部";
+"Drop Shadow" = "投影";
+"Color Overlay" = "颜色叠加";
+"Inner Shadow" = "内阴影";
+"Outer Glow" = "外发光";
+"Inner Glow" = "内发光";
+
+/* FilterSheet.swift */
+"Shadows" = "阴影";
+"Midtones" = "中间调";
+"Highlights" = "高光";
+"Hide the background behind a layer mask, keeping the foreground subjects. The pixels stay, so the background can be painted back at any time." = "隐藏图层蒙版后的背景，保留前景主体。像素保留，因此背景可以随时绘制回来。";
+"Fill the selection using surrounding pixels from this layer." = "使用此图层周围的像素填充选区。";
+"Distribution" = "分布";
+"Uniform" = "统一";
+"Gaussian" = "高斯";
+"Positive straightens lines that bow outward (barrel); negative, lines that bow inward (pincushion)." = "正值拉直向外凸的线（桶形）；负值拉直向内凸的线（枕形）。";
+"Limited to the selection" = "限制在选区";
+"Characters" = "字符";
+"Dark" = "暗";
+"Light" = "亮";
+"Color the result while keeping its tones, for a sepia or a cyanotype" = "为结果着色同时保留其色调，用于 sepia 或 cyanotype";
+"Put each pixel's brightness back afterwards, so only the color moves" = "之后恢复每个像素的亮度，所以只有颜色移动";
+"Basic is quick; Advanced refines the mask against the layer's own detail, for hair and fur" = "基础快速；高级根据图层自身细节优化蒙版，用于头发和毛发";
+"Pull the mask onto the image's own edges, which recovers hair and fur" = "将蒙版贴合到图像自身边缘，恢复头发和毛发";
+"Clear the haze that leaves background showing through thin areas" = "清除薄区域透出背景的雾霾";
+"Shrink the mask to drop the rim of background color around the subject, or grow it" = "缩小蒙版以去除主体周围的背景色边缘，或扩大它";
+"Choose the vignette color" = "选择暗角颜色";
+"Blend the chosen color into the edges while keeping the center unchanged" = "将所选颜色融入边缘同时保持中心不变";
+"Protect bright areas near the edge" = "保护边缘附近的亮区";
+"Make each dithered pixel this many pixels across, for a chunky old-screen look" = "使每个抖动像素这么宽，用于块状旧屏幕效果";
+"The height of each line of characters" = "每行字符的高度";
+"How far apart the screen's lines are" = "屏幕线的间距";
+"Light blooming around the lines, like a CRT's phosphors" = "线周围的辉光，像 CRT 的荧光粉";
+"Break the lines into glowing beads" = "将线分解为发光珠";
+"Make the lines waver sideways down the screen, like a CRT losing sync" = "使线在屏幕上向下摆动，像 CRT 失去同步";
+"The characters to draw with, in any order: each spot gets the one whose ink best matches its tone" = "用于绘制的字符，任意顺序：每个位置获得墨迹最匹配其色调的字符";
+"Tones per channel: 2 is pure black and white" = "每通道色调数：2 是纯黑白";
+"How much of each pixel's error spreads to its neighbors. Less gives flatter areas" = "每个像素的误差传播到邻居的量。越少区域越平坦";
+"More ink (darker) or less before dithering" = "更多墨迹（更暗）或更少在抖动前";
+"Draw each chunky pixel as a solid square, or as a round dot like a dot-matrix screen" = "将每个块状像素绘制为实心方块，或像点阵屏幕一样的圆点";
+"Draw the marks for the light tones on the dark color, like a glowing screen" = "在暗色上绘制亮色调的标记，像发光屏幕";
+
+/* GradientControls.swift */
+"Gradient" = "渐变";
+"Opacity" = "不透明度";
+"Apply" = "应用";
+"Linear runs along the line; Radial spreads out from the start point" = "线性沿直线运行；径向从起点向外扩散";
+
+/* GridSettingsSheet.swift */
+"Grid" = "网格";
+"Style" = "样式";
+"Gridline every" = "网格线间隔";
+"pixels" = "像素";
+"Subdivisions" = "细分";
+"Restore Defaults" = "恢复默认";
+"Choose a custom grid color" = "选择自定义网格颜色";
+
+/* HueSaturationSheet.swift */
+"Reset" = "重置";
+"Targeted adjustment" = "目标调整";
+"Targeted adjustment: drag on the image to change that color's saturation, or its hue with Command held" = "目标调整：在图片上拖动改变该颜色的饱和度，或按住 Command 改变色相";
+
+/* ImageSizeSheet.swift */
+"Image Size" = "图像大小";
+"Resolution" = "分辨率";
+"pixels/inch" = "像素/英寸";
+"Resizes layer pixels and applies existing transforms. Undo restores the originals." = "调整图层像素大小并应用现有变换。撤销恢复原始。";
+"Only print dimensions and resolution change. Pixels stay unchanged." = "仅打印尺寸和分辨率改变。像素保持不变。";
+"Resize" = "调整大小";
+
+/* JPEGExportSheet.swift */
+"Export JPEG" = "导出 JPEG";
+"Quality" = "质量";
+"Background for transparency" = "透明度背景";
+"Updating…" = "更新中…";
+"Fit" = "适配";
+"Export…" = "导出…";
+"Show the whole image (⌘0)" = "显示整个图像 (⌘0)";
+"Color that fills transparent areas" = "填充透明区域的颜色";
+
+/* KeyboardShortcuts.swift */
+"Click a shortcut, then press its new key combination. Changes apply when you save." = "点击快捷键，然后按新的键组合。更改在保存时应用。";
+"Contextual keys & mouse gestures" = "上下文键和鼠标手势";
+"Text fields keep standard macOS editing keys. Dialogs share the Apply/Cancel assignments above. Numeric fields use Up/Down, with Shift for larger steps. Standard macOS commands include ⌘Q to quit and ⌃⌘F for full screen. The shortcut editor itself always uses Return to save and Esc to cancel when not recording." = "文本字段保留标准 macOS 编辑键。对话框共享上述应用/取消分配。数字字段使用上/下，Shift 用于更大步长。标准 macOS 命令包括 ⌘Q 退出和 ⌃⌘F 全屏。快捷键编辑器本身在未录制时始终使用 Return 保存和 Esc 取消。";
+"Option temporarily selects the eyedropper in painting tools. Shift constrains shapes/movement or adds to a selection; Option subtracts from selections or draws from center. Command-drag moves selected pixels; Command-Option-drag copies them. Option-drag duplicates layers/folders/effects; Option-click at a layer boundary toggles clipping. Command-click a thumbnail loads its selection. Control bypasses snapping. Right-drag adjusts brush size. Modifier-and-mouse gestures are fixed." = "Option 在绘画工具中临时选择吸管。Shift 约束形状/移动或添加到选区；Option 从选区减去或从中心绘制。Command-拖动移动选中的像素；Command-Option-拖动复制它们。Option-拖动复制图层/文件夹/效果；Option-点击图层边界切换剪贴。Command-点击缩略图加载其选区。Control 绕过吸附。右键拖动调整画笔大小。修饰键和鼠标手势是固定的。";
+"Save" = "保存";
+
+/* LassoControls.swift */
+"Empty selection" = "空选区";
+"Tolerance" = "容差";
+"Edge" = "边缘";
+"Amount" = "数量";
+"Enter a whole number from 1 to \(maximum) px." = "输入 1 到 \(maximum) 像素的整数。";
+"Feather" = "羽化";
+"Deselect" = "取消选择";
+"Press M to switch between Rectangle and Ellipse" = "按 M 在矩形和椭圆之间切换";
+"Press Tab to switch between Wand and Object" = "按 Tab 在魔棒和对象之间切换";
+"Press L to switch between Freehand and Polygonal" = "按 L 在自由手绘和多边形之间切换";
+"Hold Shift to add or Option to subtract for one outline" = "按住 Shift 添加或 Option 减去一个轮廓";
+"Fade the edge of the selection by this many pixels" = "将选区边缘渐隐这么多像素";
+"How far each color channel (0–255) can differ from the clicked color and still be selected" = "每个颜色通道（0–255）与点击颜色的差异多大仍可被选中";
+"Match the clicked pixel, or the average of the pixels around it" = "匹配点击的像素，或周围像素的平均值";
+"Read colors from the active layer only, or from every visible layer as shown" = "仅从当前图层读取颜色，或从所有可见图层读取";
+"Select only similar pixels connected to the one you click; off selects them everywhere" = "仅选择与你点击的像素相连的相似像素；关闭则选择所有位置的相似像素";
+"Analyze the active layer only, or every visible layer as shown" = "仅分析当前图层，或分析所有可见图层";
+"Positive values tighten the detected mask inward; negative values expand it outward" = "正值向内收紧检测到的蒙版；负值向外扩展";
+
+/* LayerAppearanceControls.swift */
+"Blend" = "混合";
+
+/* LayerMaskMenu.swift */
+"Add layer mask" = "添加图层蒙版";
+
+/* LayersPanel.swift */
+"Layers" = "图层";
+"No layers yet" = "暂无图层";
+"New blank layer (⇧⌘N)" = "新建空白图层 (⇧⌘N)";
+"New blank layer" = "新建空白图层";
+"Group selected layers (⌘G)" = "编组选中图层 (⌘G)";
+"New folder" = "新建文件夹";
+"Add layer effect" = "添加图层效果";
+"Layer effects" = "图层效果";
+"New adjustment layer" = "新建调整图层";
+
+/* LevelsSheet.swift */
+"Loading histogram…" = "加载直方图…";
+"Sample" = "取样";
+"Auto" = "自动";
+"Linear histogram with automatic vertical scaling. Tall spikes may extend beyond the graph; all tones from 0 to 255 remain included." = "线性直方图自动垂直缩放。高峰可能超出图形；0 到 255 的所有色调仍包含在内。";
+
+/* NativeLayerList.swift */
+"Select mask: \(layer.name)" = "选择蒙版：\(layer.name)";
+
+/* NavigationToolHeader.swift */
+"Zoom percentage" = "缩放百分比";
+"Zoom percentage (0.1–3200%). Press Return to apply." = "缩放百分比（0.1–3200%）。按 Return 应用。";
+
+/* NewCanvasSheet.swift */
+"New canvas" = "新建画布";
+"Open project" = "打开项目";
+"Import image" = "导入图像";
+"Create canvas" = "创建画布";
+"Preset sizes" = "预设尺寸";
+"Preset sizes for screens and common formats" = "屏幕和常见格式的预设尺寸";
+
+/* PSDConversionSheet.swift */
+"Reading the Photoshop file…" = "读取 Photoshop 文件…";
+
+/* RawDevelopSheet.swift */
+"Importing…" = "导入中…";
+"Import" = "导入";
+
+/* ShapeControls.swift */
+"Shape" = "形状";
+"Width" = "宽度";
+"Radius" = "半径";
+"Fill" = "填充";
+"Shift-U (or Tab) steps through Rectangle, Ellipse and Line" = "Shift-U（或 Tab）在矩形、椭圆和直线之间切换";
+"Round the rectangle's corners by this many pixels; 0 keeps them square" = "将矩形圆角这么多像素；0 保持直角";
+"Shapes fill with the foreground color; click to change it" = "形状用前景色填充；点击更改";
+
+/* TrimSheet.swift */
+"Trim" = "修剪";
+"Based On" = "基于";
+"Trim Away" = "修剪掉";
+
+/* TypeControls.swift */
+"Type" = "文字";
+"Tracking" = "字距";
+"Leading" = "行距";
+"Done" = "完成";
+"Edit Text" = "编辑文字";
+"Font face, including bold and italic variants" = "字体，包括粗体和斜体变体";
+"Text color" = "文字颜色";
+"Line height, baseline to baseline. Empty or 0 is Auto: 120% of the font size." = "行高，基线到基线。空或 0 为自动：字体大小的 120%。";
+"Font" = "字体";
+
+/* CompositorApp.swift */
+"Undo" = "撤销";
+"Redo" = "重做";
+"New Canvas…" = "新建画布…";
+"Open Project…" = "打开项目…";
+"Open Recent" = "打开最近";
+"Clear Menu" = "清除菜单";
+"Import Images…" = "导入图像…";
+"Save" = "保存";
+"Save As…" = "另存为…";
+"Export PNG…" = "导出 PNG…";
+"Export JPEG…" = "导出 JPEG…";
+"Close Project" = "关闭项目";
+"Check for Updates…" = "检查更新…";
+"Search Commands…" = "搜索命令…";
+"Toggle Fullscreen" = "切换全屏";
+"Fit Canvas" = "适配画布";
+"Actual Pixels" = "实际像素";
+"Zoom In" = "放大";
+"Zoom Out" = "缩小";
+"Pixel Grid (800% and above)" = "像素网格（800% 及以上）";
+"Show Transform Controls" = "显示变换控件";
+"Show" = "显示";
+"Grid" = "网格";
+"Guides" = "参考线";
+"Grid Settings…" = "网格设置…";
+"Rulers" = "标尺";
+"Snap" = "吸附";
+"Snap To" = "吸附到";
+"Layers" = "图层";
+"Document Bounds" = "文档边界";
+"Lock Guides" = "锁定参考线";
+"Clear Guides" = "清除参考线";
+"Hide Compositor" = "隐藏 Compositor";
+"Hide Others" = "隐藏其他";
+"Show All" = "显示全部";
+"Keyboard Shortcuts…" = "键盘快捷键…";
+"Fill with Foreground Color" = "用前景色填充";
+"Fill with Background Color" = "用背景色填充";
+"Clear Selection Pixels" = "清除选区像素";
+"Content-Aware Fill…" = "内容识别填充…";
+"Select" = "选择";
+"All" = "全部";
+"Deselect" = "取消选择";
+"Inverse" = "反选";
+"Layer's Pixels" = "图层的像素";
+"Subject" = "主体";
+"Color Range…" = "色彩范围…";
+"Mask's Black Areas" = "蒙版的黑色区域";
+"Expand…" = "扩展…";
+"Contract…" = "收缩…";
+"Feather…" = "羽化…";
+"Image" = "图像";
+"Curves…" = "曲线…";
+"Levels…" = "色阶…";
+"Hue/Saturation…" = "色相/饱和度…";
+"Invert" = "反相";
+"Canvas Size…" = "画布大小…";
+"Image Size…" = "图像大小…";
+"Trim…" = "修剪…";
+"Rotate Canvas 90° Clockwise" = "顺时针旋转画布 90°";
+"Rotate Canvas 90° Counterclockwise" = "逆时针旋转画布 90°";
+"Flip Canvas Horizontal" = "水平翻转画布";
+"Flip Canvas Vertical" = "垂直翻转画布";
+"Filter" = "滤镜";
+"Last Filter" = "上次滤镜";
+"Layer" = "图层";
+"New Adjustment Layer" = "新建调整图层";
+"Edit Adjustment…" = "编辑调整…";
+"Transform Selection" = "变换选区";
+"Transform Layer" = "变换图层";
+"Duplicate Layer" = "复制图层";
+"Layer via Copy" = "通过拷贝新建图层";
+"Create Clipping Mask" = "创建剪贴蒙版";
+"Release Clipping Mask" = "释放剪贴蒙版";
+"Group Selected Layers" = "编组选中图层";
+"Ungroup Layers" = "取消编组";
+"Move Out of Folder" = "移出文件夹";
+"Rename Layer…" = "重命名图层…";
+"Show Layer" = "显示图层";
+"Hide Layer" = "隐藏图层";
+"Move Layer Up" = "上移图层";
+"Move Layer Down" = "下移图层";
+"Merge Down" = "向下合并";
+"Merge Layers" = "合并图层";
+"Merge Group" = "合并组";
+"Flip Layer Horizontal" = "水平翻转图层";
+"Flip Layer Vertical" = "垂直翻转图层";
+"Delete Layer" = "删除图层";
+"Delete Layers" = "删除图层";
+"Delete Layer Mask" = "删除图层蒙版";
+"Cut" = "剪切";
+"Copy" = "拷贝";
+"Copy Merged" = "合并拷贝";
+"Paste" = "粘贴";
+
+/* ContentView.swift */
+"New canvas" = "新建画布";
+"Fit" = "适配";
+"100%" = "100%";
+"Select a tool" = "选择工具";
+"Ready when you are" = "准备就绪";
+"Working…" = "处理中…";
+"Importing images…" = "导入图像…";
+"Import couldn't finish" = "导入无法完成";
+"Couldn't paint" = "无法绘画";
+"Couldn't crop" = "无法裁剪";
+"Drag to resize the panel" = "拖动调整面板大小";
+
+/* ProjectTabLayout.swift / ProjectTabs.swift */
+"Unsaved changes" = "未保存的更改";
+"Drop into new canvas" = "拖入新画布";
+
+/* FloatingPanel.swift */
+"Search commands and tools" = "搜索命令和工具";
+
+/* CommandPalette.swift */
+"Search commands and tools" = "搜索命令和工具";
+
+/* PSDConversionSheet.swift */
+"Reading the Photoshop file…" = "读取 Photoshop 文件…";
+
+/* RawDevelopSheet.swift */
+"Develop" = "显影";

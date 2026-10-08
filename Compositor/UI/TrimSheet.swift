@@ -12,10 +12,10 @@ struct TrimSheet: View {
 
     @ViewBuilder private var sheet: some View {
         VStack(alignment: .leading, spacing: 18) {
-            Text("Trim").font(.title2.bold())
+            Text("修剪").font(.title2.bold())
 
             VStack(alignment: .leading, spacing: 8) {
-                Text("Based On").font(.headline)
+                Text("基于").font(.headline)
                 Picker("", selection: $basedOn) {
                     ForEach(TrimBasedOn.allCases) { option in
                         Text(option.rawValue).tag(option)
@@ -28,15 +28,15 @@ struct TrimSheet: View {
             Divider()
 
             VStack(alignment: .leading, spacing: 8) {
-                Text("Trim Away").font(.headline)
+                Text("修剪掉").font(.headline)
                 Grid(alignment: .leading, horizontalSpacing: 24, verticalSpacing: 8) {
                     GridRow {
-                        Toggle("Top", isOn: $trimTop)
-                        Toggle("Bottom", isOn: $trimBottom)
+                        Toggle("顶部", isOn: $trimTop)
+                        Toggle("底部", isOn: $trimBottom)
                     }
                     GridRow {
-                        Toggle("Left", isOn: $trimLeft)
-                        Toggle("Right", isOn: $trimRight)
+                        Toggle("左侧", isOn: $trimLeft)
+                        Toggle("右侧", isOn: $trimRight)
                     }
                 }
             }
@@ -44,10 +44,10 @@ struct TrimSheet: View {
             Divider()
 
             HStack {
-                Button("Cancel") { finish(nil) }
+                Button("取消") { finish(nil) }
                     .configuredNativeShortcut(.escape)
                 Spacer()
-                Button("OK") {
+                Button("确定") {
                     let options = TrimOptions(
                         basedOn: basedOn,
                         top: trimTop,
