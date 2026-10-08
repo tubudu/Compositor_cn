@@ -22,90 +22,90 @@ struct FilterSheet: View {
             case .curves:
                 CurvesControls(settings: Binding(get: { settings.curves }, set: { new in update { $0.curves = new } }))
             case .exposure:
-                control("Exposure", \.exposure.exposure, range: ExposureSettings.exposureRange, unit: "", decimals: 2, logarithmic: false)
-                control("Offset", \.exposure.offset, range: ExposureSettings.offsetRange, unit: "", decimals: 4, logarithmic: false)
-                control("Gamma", \.exposure.gamma, range: ExposureSettings.gammaRange, unit: "", decimals: 2, logarithmic: true)
+                control("曝光", \.exposure.exposure, range: ExposureSettings.exposureRange, unit: "", decimals: 2, logarithmic: false)
+                control("偏移", \.exposure.offset, range: ExposureSettings.offsetRange, unit: "", decimals: 4, logarithmic: false)
+                control("伽马", \.exposure.gamma, range: ExposureSettings.gammaRange, unit: "", decimals: 2, logarithmic: true)
             case .gradientMap:
                 GradientMapControls(settings: Binding(get: { settings.gradientMap }, set: { new in update { $0.gradientMap = new } }),
                                     pick: { session.openGradientMapColorPicker(highlights: $0) })
             case .blackWhite:
                 // Each slider says how bright that family of colors becomes, as Photoshop's do.
-                control("Reds", \.blackWhite.reds, range: BlackWhiteSettings.range, unit: "%", decimals: 0, logarithmic: false, track: .luminance(0))
-                control("Yellows", \.blackWhite.yellows, range: BlackWhiteSettings.range, unit: "%", decimals: 0, logarithmic: false, track: .luminance(60))
-                control("Greens", \.blackWhite.greens, range: BlackWhiteSettings.range, unit: "%", decimals: 0, logarithmic: false, track: .luminance(120))
-                control("Cyans", \.blackWhite.cyans, range: BlackWhiteSettings.range, unit: "%", decimals: 0, logarithmic: false, track: .luminance(180))
-                control("Blues", \.blackWhite.blues, range: BlackWhiteSettings.range, unit: "%", decimals: 0, logarithmic: false, track: .luminance(240))
-                control("Magentas", \.blackWhite.magentas, range: BlackWhiteSettings.range, unit: "%", decimals: 0, logarithmic: false, track: .luminance(300))
-                Toggle("Tint", isOn: flag(\.blackWhite.tint))
-                    .help("Color the result while keeping its tones, for a sepia or a cyanotype")
+                control("红色", \.blackWhite.reds, range: BlackWhiteSettings.range, unit: "%", decimals: 0, logarithmic: false, track: .luminance(0))
+                control("黄色", \.blackWhite.yellows, range: BlackWhiteSettings.range, unit: "%", decimals: 0, logarithmic: false, track: .luminance(60))
+                control("绿色", \.blackWhite.greens, range: BlackWhiteSettings.range, unit: "%", decimals: 0, logarithmic: false, track: .luminance(120))
+                control("青色", \.blackWhite.cyans, range: BlackWhiteSettings.range, unit: "%", decimals: 0, logarithmic: false, track: .luminance(180))
+                control("蓝色", \.blackWhite.blues, range: BlackWhiteSettings.range, unit: "%", decimals: 0, logarithmic: false, track: .luminance(240))
+                control("洋红", \.blackWhite.magentas, range: BlackWhiteSettings.range, unit: "%", decimals: 0, logarithmic: false, track: .luminance(300))
+                Toggle("色调", isOn: flag(\.blackWhite.tint))
+                    .help("为结果着色同时保留其色调，用于 sepia 或 cyanotype")
                 if settings.blackWhite.tint {
-                    control("Hue", \.blackWhite.tintHue, range: 0...360, unit: "°", decimals: 0, logarithmic: false, track: .plain)
-                    control("Saturation", \.blackWhite.tintSaturation, range: 0...100, unit: "%", decimals: 0, logarithmic: false,
+                    control("色相", \.blackWhite.tintHue, range: 0...360, unit: "°", decimals: 0, logarithmic: false, track: .plain)
+                    control("饱和度", \.blackWhite.tintSaturation, range: 0...100, unit: "%", decimals: 0, logarithmic: false,
                             track: .saturation(settings.blackWhite.tintHue))
                 }
             case .cameraRaw:
                 CameraRawControls(session: session)
                     .frame(maxHeight: .infinity, alignment: .top)
             case .colorBalance:
-                Text("Shadows").font(.headline)
-                control("Cyan / Red", \.colorBalance.shadowCyanRed, range: ColorBalanceSettings.range, unit: "", decimals: 0, logarithmic: false, track: Self.cyanRedTrack)
-                control("Magenta / Green", \.colorBalance.shadowMagentaGreen, range: ColorBalanceSettings.range, unit: "", decimals: 0, logarithmic: false, track: Self.magentaGreenTrack)
-                control("Yellow / Blue", \.colorBalance.shadowYellowBlue, range: ColorBalanceSettings.range, unit: "", decimals: 0, logarithmic: false, track: Self.yellowBlueTrack)
-                Text("Midtones").font(.headline)
-                control("Cyan / Red", \.colorBalance.midCyanRed, range: ColorBalanceSettings.range, unit: "", decimals: 0, logarithmic: false, track: Self.cyanRedTrack)
-                control("Magenta / Green", \.colorBalance.midMagentaGreen, range: ColorBalanceSettings.range, unit: "", decimals: 0, logarithmic: false, track: Self.magentaGreenTrack)
-                control("Yellow / Blue", \.colorBalance.midYellowBlue, range: ColorBalanceSettings.range, unit: "", decimals: 0, logarithmic: false, track: Self.yellowBlueTrack)
-                Text("Highlights").font(.headline)
-                control("Cyan / Red", \.colorBalance.highlightCyanRed, range: ColorBalanceSettings.range, unit: "", decimals: 0, logarithmic: false, track: Self.cyanRedTrack)
-                control("Magenta / Green", \.colorBalance.highlightMagentaGreen, range: ColorBalanceSettings.range, unit: "", decimals: 0, logarithmic: false, track: Self.magentaGreenTrack)
-                control("Yellow / Blue", \.colorBalance.highlightYellowBlue, range: ColorBalanceSettings.range, unit: "", decimals: 0, logarithmic: false, track: Self.yellowBlueTrack)
-                Toggle("Preserve Luminosity", isOn: flag(\.colorBalance.preserveLuminosity))
-                    .help("Put each pixel's brightness back afterwards, so only the color moves")
+                Text("阴影").font(.headline)
+                control("青色/红色", \.colorBalance.shadowCyanRed, range: ColorBalanceSettings.range, unit: "", decimals: 0, logarithmic: false, track: Self.cyanRedTrack)
+                control("洋红/绿色", \.colorBalance.shadowMagentaGreen, range: ColorBalanceSettings.range, unit: "", decimals: 0, logarithmic: false, track: Self.magentaGreenTrack)
+                control("黄色/蓝色", \.colorBalance.shadowYellowBlue, range: ColorBalanceSettings.range, unit: "", decimals: 0, logarithmic: false, track: Self.yellowBlueTrack)
+                Text("中间调").font(.headline)
+                control("青色/红色", \.colorBalance.midCyanRed, range: ColorBalanceSettings.range, unit: "", decimals: 0, logarithmic: false, track: Self.cyanRedTrack)
+                control("洋红/绿色", \.colorBalance.midMagentaGreen, range: ColorBalanceSettings.range, unit: "", decimals: 0, logarithmic: false, track: Self.magentaGreenTrack)
+                control("黄色/蓝色", \.colorBalance.midYellowBlue, range: ColorBalanceSettings.range, unit: "", decimals: 0, logarithmic: false, track: Self.yellowBlueTrack)
+                Text("高光").font(.headline)
+                control("青色/红色", \.colorBalance.highlightCyanRed, range: ColorBalanceSettings.range, unit: "", decimals: 0, logarithmic: false, track: Self.cyanRedTrack)
+                control("洋红/绿色", \.colorBalance.highlightMagentaGreen, range: ColorBalanceSettings.range, unit: "", decimals: 0, logarithmic: false, track: Self.magentaGreenTrack)
+                control("黄色/蓝色", \.colorBalance.highlightYellowBlue, range: ColorBalanceSettings.range, unit: "", decimals: 0, logarithmic: false, track: Self.yellowBlueTrack)
+                Toggle("保留明度", isOn: flag(\.colorBalance.preserveLuminosity))
+                    .help("之后恢复每个像素的亮度，所以只有颜色移动")
             case .grain:
-                control("Amount", \.grain.amount, range: GrainSettings.amountRange, unit: "", decimals: 0, logarithmic: false)
-                control("Size", \.grain.size, range: GrainSettings.sizeRange, unit: "px", decimals: 1, logarithmic: true)
-                control("Roughness", \.grain.roughness, range: GrainSettings.roughnessRange, unit: "", decimals: 0, logarithmic: false)
+                control("数量", \.grain.amount, range: GrainSettings.amountRange, unit: "", decimals: 0, logarithmic: false)
+                control("大小", \.grain.size, range: GrainSettings.sizeRange, unit: "px", decimals: 1, logarithmic: true)
+                control("粗糙度", \.grain.roughness, range: GrainSettings.roughnessRange, unit: "", decimals: 0, logarithmic: false)
             case .removeBackground:
-                Text("Hide the background behind a layer mask, keeping the foreground subjects. The pixels stay, so the background can be painted back at any time.")
+                Text("隐藏图层蒙版后的背景，保留前景主体。像素保留，因此背景可以随时绘制回来。")
                     .fixedSize(horizontal: false, vertical: true)
-                Picker("Quality", selection: Binding(get: { settings.backgroundQuality },
+                Picker("质量", selection: Binding(get: { settings.backgroundQuality },
                                                      set: { new in update { $0.backgroundQuality = new } })) {
                     ForEach(BackgroundQuality.allCases, id: \.self) { Text($0.rawValue).tag($0) }
                 }
                 .pickerStyle(.segmented).labelsHidden()
-                .help("Basic is quick; Advanced refines the mask against the layer's own detail, for hair and fur")
+                .help("基础快速；高级根据图层自身细节优化蒙版，用于头发和毛发")
                 if settings.backgroundQuality == .advanced {
-                    control("Refine", \.refineEdges, range: 0...40, unit: "px", decimals: 0, logarithmic: false)
-                        .help("Pull the mask onto the image's own edges, which recovers hair and fur")
-                    control("Contrast", \.matteContrast, range: 0...100, unit: "%", decimals: 0, logarithmic: false)
-                        .help("Clear the haze that leaves background showing through thin areas")
-                    control("Shift Edge", \.shiftEdge, range: -10...10, unit: "px", decimals: 0, logarithmic: false)
-                        .help("Shrink the mask to drop the rim of background color around the subject, or grow it")
+                    control("优化", \.refineEdges, range: 0...40, unit: "px", decimals: 0, logarithmic: false)
+                        .help("将蒙版贴合到图像自身边缘，恢复头发和毛发")
+                    control("对比度", \.matteContrast, range: 0...100, unit: "%", decimals: 0, logarithmic: false)
+                        .help("清除薄区域透出背景的雾霾")
+                    control("移动边缘", \.shiftEdge, range: -10...10, unit: "px", decimals: 0, logarithmic: false)
+                        .help("缩小蒙版以去除主体周围的背景色边缘，或扩大它")
                 }
             case .contentAwareFill:
-                Text("Fill the selection using surrounding pixels from this layer.")
+                Text("使用此图层周围的像素填充选区。")
                     .fixedSize(horizontal: false, vertical: true)
             case .gaussianBlur:
-                control("Radius", \.radius, range: 0.1...250, unit: "px", decimals: 1, logarithmic: true)
+                control("半径", \.radius, range: 0.1...250, unit: "px", decimals: 1, logarithmic: true)
             case .motionBlur:
-                control("Angle", \.angle, range: -90...90, unit: "°", decimals: 0, logarithmic: false)
-                control("Distance", \.distance, range: 1...2000, unit: "px", decimals: 0, logarithmic: true)
+                control("角度", \.angle, range: -90...90, unit: "°", decimals: 0, logarithmic: false)
+                control("距离", \.distance, range: 1...2000, unit: "px", decimals: 0, logarithmic: true)
             case .addNoise:
-                control("Amount", \.amount, range: 0.1...400, unit: "%", decimals: 1, logarithmic: true)
+                control("数量", \.amount, range: 0.1...400, unit: "%", decimals: 1, logarithmic: true)
                 HStack(spacing: 10) {
-                    Text("Distribution")
-                    Picker("Distribution", selection: flag(\.gaussian)) {
-                        Text("Uniform").tag(false)
-                        Text("Gaussian").tag(true)
+                    Text("分布")
+                    Picker("分布", selection: flag(\.gaussian)) {
+                        Text("统一").tag(false)
+                        Text("高斯").tag(true)
                     }
                     .pickerStyle(.segmented).labelsHidden()
                 }
-                Toggle("Monochromatic", isOn: flag(\.monochromatic))
+                Toggle("单色", isOn: flag(\.monochromatic))
             case .dither:
                 ditherControls
             case .vignette:
                 HStack(spacing: 8) {
-                    Text("Color").frame(width: 95, alignment: .leading)
+                    Text("颜色").frame(width: 95, alignment: .leading)
                     Button { session.openVignetteColorPicker() } label: {
                         let shape = RoundedRectangle(cornerRadius: 6, style: .continuous)
                         shape.fill(Color(.sRGB, red: settings.vignetteColor.red,
@@ -116,41 +116,41 @@ struct FilterSheet: View {
                             .contentShape(shape)
                     }
                     .buttonStyle(.plain)
-                    .help("Choose the vignette color")
+                    .help("选择暗角颜色")
                     Spacer()
                 }
-                control("Amount", \.vignetteAmount, range: 0...100, unit: "%", decimals: 0, logarithmic: false)
-                    .help("Blend the chosen color into the edges while keeping the center unchanged")
-                control("Midpoint", \.vignetteMidpoint, range: 0...100, unit: "%", decimals: 0, logarithmic: false)
-                control("Roundness", \.vignetteRoundness, range: -100...100, unit: "", decimals: 0, logarithmic: false)
-                control("Feather", \.vignetteFeather, range: 0...100, unit: "%", decimals: 0, logarithmic: false)
-                control("Highlights", \.vignetteHighlights, range: 0...100, unit: "%", decimals: 0, logarithmic: false)
-                    .help("Protect bright areas near the edge")
+                control("数量", \.vignetteAmount, range: 0...100, unit: "%", decimals: 0, logarithmic: false)
+                    .help("将所选颜色融入边缘同时保持中心不变")
+                control("中点", \.vignetteMidpoint, range: 0...100, unit: "%", decimals: 0, logarithmic: false)
+                control("圆度", \.vignetteRoundness, range: -100...100, unit: "", decimals: 0, logarithmic: false)
+                control("羽化", \.vignetteFeather, range: 0...100, unit: "%", decimals: 0, logarithmic: false)
+                control("高光", \.vignetteHighlights, range: 0...100, unit: "%", decimals: 0, logarithmic: false)
+                    .help("保护边缘附近的亮区")
             case .bloomGlow:
-                control("Amount", \.bloomAmount, range: 0...100, unit: "%", decimals: 0, logarithmic: false)
-                control("Radius", \.bloomRadius, range: 1...150, unit: "px", decimals: 0, logarithmic: true)
+                control("数量", \.bloomAmount, range: 0...100, unit: "%", decimals: 0, logarithmic: false)
+                control("半径", \.bloomRadius, range: 1...150, unit: "px", decimals: 0, logarithmic: true)
             case .tonalContrast:
-                control("Amount", \.tonalAmount, range: 0...100, unit: "%", decimals: 0, logarithmic: false)
-                control("Shadows", \.tonalShadows, range: -100...100, unit: "%", decimals: 0, logarithmic: false)
-                control("Midtones", \.tonalMidtones, range: -100...100, unit: "%", decimals: 0, logarithmic: false)
-                control("Highlights", \.tonalHighlights, range: -100...100, unit: "%", decimals: 0, logarithmic: false)
-                control("Radius", \.tonalRadius, range: 1...100, unit: "px", decimals: 0, logarithmic: true)
+                control("数量", \.tonalAmount, range: 0...100, unit: "%", decimals: 0, logarithmic: false)
+                control("阴影", \.tonalShadows, range: -100...100, unit: "%", decimals: 0, logarithmic: false)
+                control("中间调", \.tonalMidtones, range: -100...100, unit: "%", decimals: 0, logarithmic: false)
+                control("高光", \.tonalHighlights, range: -100...100, unit: "%", decimals: 0, logarithmic: false)
+                control("半径", \.tonalRadius, range: 1...100, unit: "px", decimals: 0, logarithmic: true)
             case .lensCorrection:
-                control("Remove Distortion", \.distortion, range: -100...100, unit: "", decimals: 0, logarithmic: false)
-                Text("Positive straightens lines that bow outward (barrel); negative, lines that bow inward (pincushion).")
+                control("移除畸变", \.distortion, range: -100...100, unit: "", decimals: 0, logarithmic: false)
+                Text("正值拉直向外凸的线（桶形）；负值拉直向内凸的线（枕形）。")
                     .font(.callout).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
             }
-            Toggle("Preview", isOn: Binding(get: { edit?.preview ?? true },
+            Toggle("预览", isOn: Binding(get: { edit?.preview ?? true },
                                             set: { session.updateFilter(settings, preview: $0) }))
             if let error = edit?.previewError {
                 Text(error).foregroundStyle(.orange).fixedSize(horizontal: false, vertical: true)
             }
             if session.adjustmentOriginal == nil && session.selection != nil {
-                Text("Limited to the selection").font(.callout).foregroundStyle(.secondary)
+                Text("限制在选区").font(.callout).foregroundStyle(.secondary)
             }
             Divider()
             HStack {
-                Button("Cancel") { session.cancelFilter() }.configuredNativeShortcut(.escape)
+                Button("取消") { session.cancelFilter() }.configuredNativeShortcut(.escape)
                 Spacer()
                 // While the preview is being worked out (Remove Background's mask, Content-Aware Fill) OK waits, so
                 // the panel says what it is waiting for rather than showing a disabled button and nothing else.
@@ -158,10 +158,10 @@ struct FilterSheet: View {
                 // make the panel flicker as it grows and shrinks.
                 if edit?.committing == true || (edit?.preparing == true && edit?.kind.isAutomatic == true) {
                     ProgressView().controlSize(.small)
-                    Text(edit?.committing == true ? "Applying…" : "Working…")
+                    Text(edit?.committing == true ? "应用中…" : "处理中…")
                         .font(.callout).foregroundStyle(.secondary)
                 }
-                Button("OK") { Task { await session.commitFilter() } }
+                Button("确定") { Task { await session.commitFilter() } }
                     .configuredNativeShortcut(.return).buttonStyle(.borderedProminent)
                     .disabled(edit?.kind.isAutomatic == true && (edit?.preparing == true || edit?.previewError != nil))
             }
@@ -183,80 +183,80 @@ struct FilterSheet: View {
 
     @ViewBuilder private var ditherControls: some View {
         let dither = settings.dither
-        Picker("Style", selection: Binding(get: { dither.style }, set: { new in update { $0.dither.style = new } })) {
+        Picker("样式", selection: Binding(get: { dither.style }, set: { new in update { $0.dither.style = new } })) {
             ForEach(DitherStyle.groups.indices, id: \.self) { group in
                 if group > 0 { Divider() }
                 ForEach(DitherStyle.groups[group], id: \.self) { Text($0.rawValue).tag($0) }
             }
         }
         if dither.style.usesPixelSize {
-        control("Pixel Size", \.dither.pixelSize, range: DitherSettings.pixelSizeRange, unit: "px", decimals: 0, logarithmic: false)
-            .help("Make each dithered pixel this many pixels across, for a chunky old-screen look")
+        control("像素大小", \.dither.pixelSize, range: DitherSettings.pixelSizeRange, unit: "px", decimals: 0, logarithmic: false)
+            .help("使每个抖动像素这么宽，用于块状旧屏幕效果")
         }
         if dither.style == .ascii {
-            control("Text Size", \.dither.textSize, range: DitherSettings.textSizeRange, unit: "px", decimals: 0, logarithmic: false)
-                .help("The height of each line of characters")
+            control("文字大小", \.dither.textSize, range: DitherSettings.textSizeRange, unit: "px", decimals: 0, logarithmic: false)
+                .help("每行字符的高度")
         }
         if dither.style == .scanlines {
-            control("Line Spacing", \.dither.lineSpacing, range: DitherSettings.lineSpacingRange, unit: "px", decimals: 0, logarithmic: false)
-                .help("How far apart the screen's lines are")
-            control("Glow", \.dither.glow, range: 0...100, unit: "%", decimals: 0, logarithmic: false)
-                .help("Light blooming around the lines, like a CRT's phosphors")
-            control("Dots", \.dither.dots, range: 0...100, unit: "%", decimals: 0, logarithmic: false)
-                .help("Break the lines into glowing beads")
-            control("Wobble", \.dither.wobble, range: DitherSettings.wobbleRange, unit: "px", decimals: 0, logarithmic: false)
-                .help("Make the lines waver sideways down the screen, like a CRT losing sync")
+            control("线间距", \.dither.lineSpacing, range: DitherSettings.lineSpacingRange, unit: "px", decimals: 0, logarithmic: false)
+                .help("屏幕线的间距")
+            control("辉光", \.dither.glow, range: 0...100, unit: "%", decimals: 0, logarithmic: false)
+                .help("线周围的辉光，像 CRT 的荧光粉")
+            control("点", \.dither.dots, range: 0...100, unit: "%", decimals: 0, logarithmic: false)
+                .help("将线分解为发光珠")
+            control("摆动", \.dither.wobble, range: DitherSettings.wobbleRange, unit: "px", decimals: 0, logarithmic: false)
+                .help("使线在屏幕上向下摆动，像 CRT 失去同步")
         }
         if dither.style.isHalftone {
-            control("Cell Size", \.dither.cellSize, range: DitherSettings.cellSizeRange, unit: "px", decimals: 0, logarithmic: false)
+            control("单元格大小", \.dither.cellSize, range: DitherSettings.cellSizeRange, unit: "px", decimals: 0, logarithmic: false)
         }
         if dither.style.isHalftone {
-            control("Angle", \.dither.angle, range: -90...90, unit: "°", decimals: 0, logarithmic: false)
+            control("角度", \.dither.angle, range: -90...90, unit: "°", decimals: 0, logarithmic: false)
         }
         if dither.style == .ascii {
             HStack(spacing: 10) {
-                Text("Characters")
-                TextField("Characters", text: Binding(get: { dither.characters }, set: { new in update { $0.dither.characters = new } }))
+                Text("字符")
+                TextField("字符", text: Binding(get: { dither.characters }, set: { new in update { $0.dither.characters = new } }))
                     .textFieldStyle(.roundedBorder).font(.body.monospaced())
             }
-            .help("The characters to draw with, in any order: each spot gets the one whose ink best matches its tone")
+            .help("用于绘制的字符，任意顺序：每个位置获得墨迹最匹配其色调的字符")
         }
         if dither.style.hasTones {
-            control("Tones", \.dither.levels, range: DitherSettings.levelsRange, unit: "", decimals: 0, logarithmic: false)
-                .help("Tones per channel: 2 is pure black and white")
+            control("色调数", \.dither.levels, range: DitherSettings.levelsRange, unit: "", decimals: 0, logarithmic: false)
+                .help("每通道色调数：2 是纯黑白")
         }
         if dither.style.diffuses {
-            control("Diffusion", \.dither.diffusion, range: 0...100, unit: "%", decimals: 0, logarithmic: false)
-                .help("How much of each pixel's error spreads to its neighbors. Less gives flatter areas")
+            control("扩散", \.dither.diffusion, range: 0...100, unit: "%", decimals: 0, logarithmic: false)
+                .help("每个像素的误差传播到邻居的量。越少区域越平坦")
         }
-        control("Density", \.dither.density, range: -100...100, unit: "", decimals: 0, logarithmic: false)
-            .help("More ink (darker) or less before dithering")
-        control("Contrast", \.dither.contrast, range: -100...100, unit: "", decimals: 0, logarithmic: false)
+        control("密度", \.dither.density, range: -100...100, unit: "", decimals: 0, logarithmic: false)
+            .help("更多墨迹（更暗）或更少在抖动前")
+        control("对比度", \.dither.contrast, range: -100...100, unit: "", decimals: 0, logarithmic: false)
         // A menu, like Style: the three choices as segments are wider than the panel, which then flips between
         // squeezing the row and wrapping it, resizing itself at every slider step.
-        Picker("Colors", selection: Binding(get: { dither.colors }, set: { new in update { $0.dither.colors = new } })) {
+        Picker("颜色", selection: Binding(get: { dither.colors }, set: { new in update { $0.dither.colors = new } })) {
             ForEach(DitherColors.allCases, id: \.self) { Text($0.rawValue).tag($0) }
         }
         .fixedSize()
         if dither.colors == .twoColors {
             HStack(spacing: 8) {
-                Text("Dark")
-                swatch(dither.dark, help: "Choose the dark color") { session.openDitherColorPicker(light: false) }
-                Text("Light").padding(.leading, 10)
-                swatch(dither.light, help: "Choose the light color") { session.openDitherColorPicker(light: true) }
+                Text("暗")
+                swatch(dither.dark, help: "选择暗色") { session.openDitherColorPicker(light: false) }
+                Text("亮").padding(.leading, 10)
+                swatch(dither.light, help: "选择亮色") { session.openDitherColorPicker(light: true) }
                 Spacer()
             }
         }
         if dither.pixelSize > 1, dither.style.usesPixelSize {
-            Picker("Pixel Shape", selection: Binding(get: { dither.pixelShape }, set: { new in update { $0.dither.pixelShape = new } })) {
+            Picker("像素形状", selection: Binding(get: { dither.pixelShape }, set: { new in update { $0.dither.pixelShape = new } })) {
                 ForEach(DitherPixelShape.allCases, id: \.self) { Text($0.rawValue).tag($0) }
             }
             .fixedSize()
-            .help("Draw each chunky pixel as a solid square, or as a round dot like a dot-matrix screen")
+            .help("将每个块状像素绘制为实心方块，或像点阵屏幕一样的圆点")
         }
         if dither.style.drawsMarks {
-            Toggle("Light on Dark", isOn: flag(\.dither.lightOnDark))
-                .help("Draw the marks for the light tones on the dark color, like a glowing screen")
+            Toggle("亮色在暗色上", isOn: flag(\.dither.lightOnDark))
+                .help("在暗色上绘制亮色调的标记，像发光屏幕")
         }
     }
 
@@ -307,7 +307,7 @@ struct FilterSheet: View {
                             range: range)
             if let track {
                 CameraRawSlider(value: settings[keyPath: key], range: range, track: track,
-                                help: "\(title). Double-click to reset.",
+                                help: "\(title)。双击重置。",
                                 onChange: { value in update { $0[keyPath: key] = (value * step).rounded() / step } },
                                 onReset: reset)
             } else {
@@ -339,11 +339,11 @@ struct GradientMapControls: View {
                 .overlay { RoundedRectangle(cornerRadius: 4, style: .continuous).strokeBorder(.black.opacity(0.35)) }
                 .accessibilityHidden(true)
             HStack(spacing: 20) {
-                swatch("Shadows", settings.shadows) { pick(false) }
-                swatch("Highlights", settings.highlights) { pick(true) }
+                swatch("阴影", settings.shadows) { pick(false) }
+                swatch("高光", settings.highlights) { pick(true) }
                 Spacer()
             }
-            Toggle("Reverse", isOn: $settings.reversed)
+            Toggle("反向", isOn: $settings.reversed)
         }
     }
 
@@ -361,8 +361,8 @@ struct GradientMapControls: View {
                     .contentShape(shape)
             }
             .buttonStyle(.plain)
-            .help("Choose the \(title.lowercased()) color")
-            .accessibilityLabel("\(title) color")
+            .help("选择\(title.lowercased())颜色")
+            .accessibilityLabel("\(title)颜色")
             Text(title)
         }
     }

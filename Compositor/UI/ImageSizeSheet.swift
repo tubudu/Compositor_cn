@@ -11,9 +11,9 @@ struct ImageSizeSheet: View {
     @State private var lastResolution: Double
     @State private var locked = true
     @State private var resample = true
-    @State private var unit = "Pixels"
+    @State private var unit = "像素"
     @State private var sampling: LayerSampling = .high
-    private let units = ["Pixels", "Percent", "Inches", "Centimeters"]
+    private let units = ["像素", "百分比", "英寸", "厘米"]
 
     init(document: CanvasDocument, finish: @escaping (ImageSizeOptions?) -> Void) {
         self.document = document
@@ -31,25 +31,25 @@ struct ImageSizeSheet: View {
     }
     private func display(_ pixels: Double, original: Int) -> Double {
         switch unit {
-        case "Percent": return pixels / Double(original) * 100
-        case "Inches": return pixels / resolution
-        case "Centimeters": return pixels / resolution * 2.54
+        case "百分比": return pixels / Double(original) * 100
+        case "英寸": return pixels / resolution
+        case "厘米": return pixels / resolution * 2.54
         default: return pixels
         }
     }
     private func dimension(isWidth: Bool) -> Binding<Double> {
         Binding(get: { display(isWidth ? width : height, original: isWidth ? document.width : document.height) }, set: { value in
             guard value.isFinite, value > 0 else { return }
-            if unit == "Inches" || unit == "Centimeters", !(resolution.isFinite && resolution > 0) { return }
+            if unit == "英寸" || unit == "厘米", !(resolution.isFinite && resolution > 0) { return }
             if !resample {
-                resolution = (isWidth ? width : height) / value * (unit == "Centimeters" ? 2.54 : 1)
+                resolution = (isWidth ? width : height) / value * (unit == "厘米" ? 2.54 : 1)
                 return
             }
             let pixels: Double
             switch unit {
-            case "Percent": pixels = value / 100 * Double(isWidth ? document.width : document.height)
-            case "Inches": pixels = value * resolution
-            case "Centimeters": pixels = value / 2.54 * resolution
+            case "百分比": pixels = value / 100 * Double(isWidth ? document.width : document.height)
+            case "英寸": pixels = value * resolution
+            case "厘米": pixels = value / 2.54 * resolution
             default: pixels = value
             }
             if isWidth {
@@ -63,7 +63,7 @@ struct ImageSizeSheet: View {
     }
 
     private var canScrubDimensions: Bool {
-        (unit != "Inches" && unit != "Centimeters") || (resolution.isFinite && resolution > 0)
+        (unit != "英寸" && unit != "厘米") || (resolution.isFinite && resolution > 0)
     }
 
     private func scrubRange(isWidth: Bool) -> ClosedRange<Double> {
@@ -72,7 +72,7 @@ struct ImageSizeSheet: View {
         let other = isWidth ? height : width
         let original = Double(isWidth ? document.width : document.height)
         if !resample {
-            let multiplier = unit == "Centimeters" ? 2.54 : 1.0
+            let multiplier = unit == "厘米" ? 2.54 : 1.0
             return pixels * multiplier / 9600...pixels * multiplier
         }
         let minimum = locked ? max(1, pixels / other) : 1.0
@@ -81,9 +81,9 @@ struct ImageSizeSheet: View {
         let maximum = max(minimum, min(dimensionLimit, areaLimit))
         func displayed(_ count: Double) -> Double {
             switch unit {
-            case "Percent": return count / original * 100
-            case "Inches": return count / resolution
-            case "Centimeters": return count / resolution * 2.54
+            case "百分比": return count / original * 100
+            case "英寸": return count / resolution
+            case "厘米": return count / resolution * 2.54
             default: return count
             }
         }
@@ -92,11 +92,11 @@ struct ImageSizeSheet: View {
 
     private func scrubSensitivity(isWidth: Bool) -> Double {
         guard canScrubDimensions else { return 0 }
-        if !resample { return unit == "Centimeters" ? 0.0254 : 0.01 }
+        if !resample { return unit == "厘米" ? 0.0254 : 0.01 }
         switch unit {
-        case "Percent": return 100 / Double(isWidth ? document.width : document.height)
-        case "Inches": return 1 / resolution
-        case "Centimeters": return 2.54 / resolution
+        case "百分比": return 100 / Double(isWidth ? document.width : document.height)
+        case "英寸": return 1 / resolution
+        case "厘米": return 2.54 / resolution
         default: return 1
         }
     }
@@ -104,63 +104,63 @@ struct ImageSizeSheet: View {
     var body: some View { sheet.roundedControls() }
     @ViewBuilder private var sheet: some View {
         VStack(alignment: .leading, spacing: 18) {
-            Text("Image Size").font(.title2.bold())
-            Text("Current: \(document.width) × \(document.height) pixels").foregroundStyle(.secondary)
-            Picker("Units", selection: $unit) {
-                ForEach(units.filter { resample || ($0 != "Pixels" && $0 != "Percent") }, id: \.self) { Text($0) }
+            Text("图像大小").font(.title2.bold())
+            Text("当前：\(document.width) × \(document.height) 像素").foregroundStyle(.secondary)
+            Picker("单位", selection: $unit) {
+                ForEach(units.filter { resample || ($0 != "像素" && $0 != "百分比") }, id: \.self) { Text($0) }
             }
             HStack {
-                Text("Width").frame(width: 75, alignment: .leading)
+                Text("宽度").frame(width: 75, alignment: .leading)
                     .scrubbable(sensitivity: scrubSensitivity(isWidth: true),
                                 value: dimension(isWidth: true), range: scrubRange(isWidth: true), step: 1)
                     .disabled(!canScrubDimensions)
-                TextField("Width", value: dimension(isWidth: true), format: .number.precision(.fractionLength(0...3)))
+                TextField("宽度", value: dimension(isWidth: true), format: .number.precision(.fractionLength(0...3)))
             }
             HStack {
-                Text("Height").frame(width: 75, alignment: .leading)
+                Text("高度").frame(width: 75, alignment: .leading)
                     .scrubbable(sensitivity: scrubSensitivity(isWidth: false),
                                 value: dimension(isWidth: false), range: scrubRange(isWidth: false), step: 1)
                     .disabled(!canScrubDimensions)
-                TextField("Height", value: dimension(isWidth: false), format: .number.precision(.fractionLength(0...3)))
+                TextField("高度", value: dimension(isWidth: false), format: .number.precision(.fractionLength(0...3)))
             }
-            Toggle("Lock aspect ratio", isOn: $locked).disabled(!resample)
+            Toggle("锁定宽高比", isOn: $locked).disabled(!resample)
             HStack {
-                Text("Resolution").scrubbable(sensitivity: 1, value: $resolution, range: 1...9600, step: 1)
-                TextField("Resolution", value: $resolution, format: .number.precision(.fractionLength(0...3)))
+                Text("分辨率").scrubbable(sensitivity: 1, value: $resolution, range: 1...9600, step: 1)
+                TextField("分辨率", value: $resolution, format: .number.precision(.fractionLength(0...3)))
                     .onChange(of: resolution) { _, new in
                         guard new.isFinite, new > 0 else { return }
-                        if resample, unit == "Inches" || unit == "Centimeters" {
+                        if resample, unit == "英寸" || unit == "厘米" {
                             width *= new / lastResolution
                             height *= new / lastResolution
                         }
                         lastResolution = new
                     }
-                Text("pixels/inch").foregroundStyle(.secondary)
+                Text("像素/英寸").foregroundStyle(.secondary)
             }
-            Toggle("Resample", isOn: $resample).onChange(of: resample) { _, enabled in
+            Toggle("重新采样", isOn: $resample).onChange(of: resample) { _, enabled in
                 if !enabled {
                     width = Double(document.width)
                     height = Double(document.height)
                     locked = true
-                    if unit == "Pixels" || unit == "Percent" { unit = "Inches" }
+                    if unit == "像素" || unit == "百分比" { unit = "英寸" }
                 }
             }
             if resample {
-                Picker("Sampling", selection: $sampling) {
+                Picker("采样", selection: $sampling) {
                     ForEach(LayerSampling.allCases, id: \.self) { Text($0.rawValue).tag($0) }
                 }
-                Text("Resizes layer pixels and applies existing transforms. Undo restores the originals.")
+                Text("调整图层像素大小并应用现有变换。撤销恢复原始。")
                     .font(.callout).foregroundStyle(.secondary)
             } else {
-                Text("Only print dimensions and resolution change. Pixels stay unchanged.")
+                Text("仅打印尺寸和分辨率改变。像素保持不变。")
                     .font(.callout).foregroundStyle(.secondary)
             }
-            Text(valid ? "Result: \(Int(width.rounded())) × \(Int(height.rounded())) pixels" : "Use 1–\(DocumentLimits.maxSide.formatted()) pixels per side, up to \(DocumentLimits.maxSurfaceMegapixels) megapixels, and 1–9,600 pixels/inch.")
+            Text(valid ? "结果：\(Int(width.rounded())) × \(Int(height.rounded())) 像素" : "每边使用 1–\(DocumentLimits.maxSide.formatted()) 像素，最多 \(DocumentLimits.maxSurfaceMegapixels) 百万像素，1–9,600 像素/英寸。")
                 .foregroundStyle(valid ? Color.secondary : Color.orange).font(.callout)
             HStack {
-                Button("Cancel") { finish(nil) }.configuredNativeShortcut(.escape)
+                Button("取消") { finish(nil) }.configuredNativeShortcut(.escape)
                 Spacer()
-                Button("Resize") {
+                Button("调整大小") {
                     guard valid else { return }
                     finish(ImageSizeOptions(width: Int(width.rounded()), height: Int(height.rounded()),
                         resolution: resolution, sampling: sampling))
